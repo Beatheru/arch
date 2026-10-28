@@ -1,1 +1,0 @@
-git clone --depth 1 https://github.com/sahaj-b/ghostty-cursor-shaders "$HOME/.config/ghostty/shaders"

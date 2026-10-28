@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Usage: ./install.sh [niri] [umbriel]
+# With no arguments both compositors are installed.
 
 set -euo pipefail
 
@@ -8,24 +11,33 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 export INSTALL_HOME="$(cd "$(dirname "$0")" && pwd)"
-export INSTALL_CONFIGS="$INSTALL_HOME/base/configs"
-export INSTALL_SCRIPTS="$INSTALL_HOME/base"
-
 source "$INSTALL_HOME/lib/all.sh"
+
+# Supported compositors, and the default when none are given
+available=(niri umbriel)
+
+compositors=("$@")
+((${#compositors[@]})) || compositors=("${available[@]}")
+for c in "${compositors[@]}"; do
+  [[ " ${available[*]} " == *" $c "* ]] || { log ERROR "Unknown compositor: $c (choose from: ${available[*]})"; exit 1; }
+done
+
+# Ask for the password once and keep sudo's login fresh until the installer exits
+sudo -v
+while sleep 60; do sudo -n -v; done &
+trap 'kill $!' EXIT
 
 start=$(date +%s)
 
-source "$INSTALL_SCRIPTS/base.sh"
+run_script "$INSTALL_HOME/preflight/prepare.sh"
+run_script "$INSTALL_HOME/preflight/packages.sh" "${compositors[@]}"
 
-export INSTALL_CONFIGS="$INSTALL_HOME/niri/configs"
-export INSTALL_SCRIPTS="$INSTALL_HOME/niri"
-
-source "$INSTALL_HOME/niri/niri.sh"
+source "$INSTALL_HOME/base/all.sh"
+for c in "${compositors[@]}"; do
+  source "$INSTALL_HOME/$c/all.sh"
+done
 
 end=$(date +%s)
 elapsed=$((end - start))
 
-minutes=$((elapsed / 60))
-seconds=$((elapsed % 60))
-
-log SUCCESS "Finished in ${minutes}m ${seconds}s"
+log SUCCESS "Finished in $((elapsed / 60))m $((elapsed % 60))s"

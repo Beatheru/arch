@@ -1,17 +1,3 @@
-# Niri
 niri
-xdg-desktop-portal-gtk
 xdg-desktop-portal-gnome
 xwayland-satellite
-polkit-gnome
-networkmanager
-iwd
-
-# Noctalia
-noctalia-git
-
-# Icons
-kora-icon-theme
-
-# Display manager
-noctalia-greeter

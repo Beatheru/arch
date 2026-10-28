@@ -1,5 +1,37 @@
 # Core
+tldr
+pacman-contrib
+openssh
+unzip
+zip
+7zip
+
+# Limine
+limine
+limine-dracut-support
+dracut
+plymouth
+snapper
+snap-pac
+limine-snapper-sync
+btrfs-assistant
+
+# System services
+networkmanager
+iwd
 bluez
+bluez-utils
+power-profiles-daemon
+fwupd
+
+# Firewall
+ufw
+ufw-docker
+
+# Docker
+docker
+docker-compose
+docker-buildx
 
 # CLI
 btop
@@ -9,28 +41,50 @@ bat
 fzf
 ripgrep
 zoxide
-wget
-curl
 fd
+jq
+wget
 rsync
+less
 neovim
 nano
-pacman-contrib
-less
-
-# Apps
-google-chrome
-zen-browser-bin
-discord
-spotify-launcher
-docker
-yaak-bin
-wireguard-tools
+fish
 starship
-ghostty
-localsend-bin
-obsidian
-visual-studio-code-bin
+wireguard-tools
+
+# Shell + greeter (Noctalia has its own polkit agent, no polkit-gnome needed)
+noctalia
+noctalia-greeter
+accountsservice
+ddcutil
+
+# File chooser portal (compositor-specific backends are in each compositor's list)
+xdg-desktop-portal-gtk
+
+# Audio
+pipewire
+pipewire-alsa
+pipewire-pulse
+# Listed so pacman doesn't have to choose a provider for "jack" / the session manager
+pipewire-jack
+wireplumber
+
+# Secrets (browsers, VS Code, etc.), unlocked at login by PAM
+gnome-keyring
+
+# Desktop utilities
+wl-clipboard
+playerctl
+brightnessctl
+xdg-user-dirs
+# Native Wayland for Qt6 apps (btrfs-assistant)
+qt6-wayland
+nautilus
+gvfs-mtp
+
+# Theming
+adw-gtk-theme
+nwg-look
 
 # Fonts
 noto-fonts
@@ -39,15 +93,14 @@ noto-fonts-emoji
 noto-fonts-extra
 ttf-jetbrains-mono-nerd
 
-# Firewall
-ufw
-ufw-docker
-
-# Limine
-limine
-limine-dracut-support
-limine-snapper-sync
-snapper
-snap-pac
-btrfs-assistant
-plymouth
+# Apps
+ghostty
+google-chrome
+zen-browser-bin
+xdg-utils
+discord
+spotify-launcher
+yaak-bin
+localsend-bin
+obsidian
+visual-studio-code-bin

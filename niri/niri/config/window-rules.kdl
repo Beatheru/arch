@@ -1,0 +1,28 @@
+window-rule {
+  geometry-corner-radius 5
+  clip-to-geometry true
+}
+
+window-rule {
+  match is-active=false
+  opacity 0.9
+}
+
+window-rule {
+  match app-id="zen"
+  match app-id="code"
+
+  open-maximized true
+
+  focus-ring {
+    off
+  }
+}
+
+window-rule {
+  match app-id="zen" title="^Picture-in-Picture$"
+  open-floating true
+  default-column-width { fixed 480; }
+  default-window-height { fixed 270; }
+  default-floating-position x=16 y=48 relative-to="bottom-right"
+}
