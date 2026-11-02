@@ -5,8 +5,8 @@ sudo cp 10-base.conf /etc/dracut.conf.d/10-base.conf
 sudo cp -r plymouth/arch-mac-style /usr/share/plymouth/themes/
 sudo plymouth-set-default-theme arch-mac-style
 
-# Don't let a hung plymouthd block the greeter
-sudo install -Dm644 plymouth/quit-timeout.conf /etc/systemd/system/plymouth-quit.service.d/quit-timeout.conf
+# plymouthd hangs when asked to quit: kill it before the login screen starts
+sudo install -Dm644 plymouth/plymouth-quit-wait.conf /etc/systemd/system/plymouth-quit-wait.service.d/kill.conf
 
 # ---------- Snapper ---------- #
 
@@ -17,8 +17,10 @@ fi
 sudo snapper -c root set-config \
   NUMBER_MIN_AGE=0 \
   NUMBER_LIMIT=10 \
-  NUMBER_LIMIT_IMPORTANT=10
+  NUMBER_LIMIT_IMPORTANT=10 \
+  TIMELINE_CREATE=no
 
+sudo systemctl disable --now snapper-timeline.timer
 sudo systemctl enable snapper-cleanup.timer
 
 # ---------- Limine ---------- #

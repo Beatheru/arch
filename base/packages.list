@@ -19,6 +19,7 @@ btrfs-assistant
 # System services
 networkmanager
 iwd
+wireless-regdb
 bluez
 bluez-utils
 power-profiles-daemon
